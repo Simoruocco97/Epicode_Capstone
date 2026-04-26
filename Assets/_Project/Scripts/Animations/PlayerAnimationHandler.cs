@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class PlayerAnimationHandler : AnimationManager
 {
-    private Vector2 lastDir = Vector2.zero;
+    [SerializeField] private SpriteRenderer sr;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (sr == null)
+            sr = GetComponentInChildren<SpriteRenderer>();
+    }
+    
+    public void SetGrounded(bool grounded) => animator.SetBool("isGrounded", grounded);
 
     public void MovementAnimation(Vector2 dir)
     {
         if (dir != Vector2.zero)
-        {
-            lastDir = dir;
-        }
-        animator.SetFloat(horizontalSpeedName, lastDir.x);
-        animator.SetFloat(verticalSpeedName, lastDir.y);
+            sr.flipX = dir.x < 0;
 
         animator.SetBool("isMoving", dir != Vector2.zero);
     }
+
+    public void SetReset() => animator.SetTrigger("isReset");
 }

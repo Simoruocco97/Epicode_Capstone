@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class EnemyDamageHandler : MonoBehaviour
 {
     [SerializeField] private LifeController life;
     [SerializeField] private Collider2D col;
     [SerializeField] private EnemyDrop drop;
-    [SerializeField] private float deathDelay = 2f;
     [SerializeField] private Enemy enemy;
-    private ObjectPool<Enemy> pool;
+    [SerializeField] private float deathDelay = 2f;
 
     private void Awake()
     {
@@ -28,7 +26,10 @@ public class EnemyDamageHandler : MonoBehaviour
     public void HandleDamage()
     {
         if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFXSound("FruitImpact");
+            AudioManager.Instance.PlaySFXSound("EnemyHurt");
+
+        if (enemy != null)
+            enemy.Anim.DamageAnimation();
     }
 
     public void HandleDeath()
@@ -36,14 +37,15 @@ public class EnemyDamageHandler : MonoBehaviour
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("EnemyDeath");
 
-        drop.TryDrop();
+        if (enemy != null)
+            enemy.Anim.DeathAnimation();
 
+        drop.Drop();
+
+        enemy.enabled = false;
         DisableEnemy();
 
-        if (pool != null)
-            Invoke(nameof(ReturnToPool), deathDelay);
-        else
-            Destroy(gameObject, deathDelay);
+        Invoke(nameof(DisableEnemy), deathDelay);
     }
 
     private void DisableEnemy()
@@ -53,15 +55,7 @@ public class EnemyDamageHandler : MonoBehaviour
 
         if (TryGetComponent<Rigidbody2D>(out var rb))
             rb.velocity = Vector2.zero;
-    }
 
-    public void SetPool(ObjectPool<Enemy> pool)
-    {
-        this.pool = pool;
-    }
-
-    private void ReturnToPool()
-    {
-        pool?.Release(enemy);
+        gameObject.SetActive(false);
     }
 }

@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
         {
             lastAttackTime = Time.time;
-            Vector3 offSet = new Vector3(lastDir * slashOffset, slashOffsetY, 0f);
+            Vector3 offSet = new(lastDir * slashOffset, slashOffsetY, 0f);
             Vector3 spawnPos = transform.position + offSet;
             slashPool.SpawnSlash(spawnPos, damage, lastDir);
         }

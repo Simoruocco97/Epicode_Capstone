@@ -1,25 +1,26 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerDamageHandler : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private Collider2D col;
-    [SerializeField] private UnityEvent onDeath;
+    [SerializeField] private PlayerAnimationHandler anim;
 
     private void Awake()
     {
+        if (anim == null)
+            anim = GetComponent<PlayerAnimationHandler>();
+
         if (playerController == null)
             playerController = GetComponent<PlayerController>();
-
-        if (col == null)
-            col = GetComponent<Collider2D>();
     }
 
     public void HandleDamage()
     {
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("PlayerDamage");
+
+        if (anim != null)
+            anim.DamageAnimation();
     }
 
     public void HandleDeath()
@@ -28,15 +29,40 @@ public class PlayerDamageHandler : MonoBehaviour
             AudioManager.Instance.PlaySFXSound("GameoverSound");
 
         DisablePlayer();
-        onDeath?.Invoke();
+
+        if (ScreenFade.Instance == null)
+            return;
+
+        ScreenFade.Instance.FadeIn(() =>
+        {
+            UI_Gameover.Instance.ShowGameover();
+            ScreenFade.Instance.FadeOut();
+        });
+    }
+
+    public void ResetPlayer()
+    {
+        if (playerController != null)
+        {
+            playerController.EnableMovement();
+            playerController.enabled = true;
+        }
+        if (TryGetComponent<PlayerAttack>(out var attack))
+            attack.enabled = true;
+
+        if (anim != null)
+            anim.SetReset();
     }
 
     private void DisablePlayer()
     {
-        if (playerController == null || col == null)
-            return;
+        if (playerController != null)
+        {
+            playerController.DisableMovement();
+            playerController.enabled = false;
+        }
 
-        playerController.enabled = false;
-        col.enabled = false;
+        if (TryGetComponent<PlayerAttack>(out var attack))
+            attack.enabled = false;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerSlash : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private float knockbackForce = 2;
+    [SerializeField] private float knockbackForce = 5;
     private PlayerSlashPool pool;
     private int damage = 2;
 
@@ -15,12 +15,12 @@ public class PlayerSlash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent<Enemy>(out var enemy))
         {
-            if (other.TryGetComponent<LifeController>(out var enemy))
-                enemy.TakeDamage(damage);
+            if (other.TryGetComponent<LifeController>(out var life))
+                life.TakeDamage(damage);
 
-            if (other.TryGetComponent(out Rigidbody2D rb))
+            if (other.TryGetComponent(out Rigidbody2D rb) && !other.CompareTag("Shooter"))
             {
                 Vector2 dir = (other.transform.position - transform.position).normalized;
                 rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);

@@ -43,7 +43,7 @@ public class ScreenFade : MonoBehaviour
         if (blackImage == null)
             return;
 
-        blackImage.DOFade(0f, fadeTime);
+        blackImage.DOFade(0f, fadeTime).SetUpdate(true);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

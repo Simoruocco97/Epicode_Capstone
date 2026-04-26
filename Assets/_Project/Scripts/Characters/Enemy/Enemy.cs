@@ -3,19 +3,18 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private LifeController enemyLife;
-    [SerializeField] private LifeController playerLife;
-    [SerializeField] private EnemyAnimationHandler anim;
-    [SerializeField] private Rigidbody2D rb;
-
-    [Header("Player Info")]
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] protected LifeController enemyLife;
+    [SerializeField] protected EnemyAnimationHandler anim;
+    [SerializeField] protected Rigidbody2D rb;
 
     [Header("Enemy Info")]
-    [SerializeField] private int enemyDamage = 1;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] protected int enemyDamage = 10;
+    [SerializeField] protected float speed = 2f;
+    [SerializeField] protected float damageTimer = 3f;
+    [SerializeField] protected float knockback = 2f;
+    private float lastDamageTime = Mathf.NegativeInfinity;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (enemyLife == null)
             enemyLife = GetComponent<LifeController>();
@@ -25,44 +24,23 @@ public class Enemy : MonoBehaviour
 
         if (rb == null)
             rb = GetComponent<Rigidbody2D>();
+    }
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player") && Time.time >= lastDamageTime + damageTimer)
         {
-            if (playerLife == null)
-                playerLife = player.GetComponent<LifeController>();
+            lastDamageTime = Time.time;
+            if (other.gameObject.TryGetComponent<LifeController>(out var playerLife))
+                playerLife.TakeDamage(enemyDamage);
 
-            if (playerTransform == null)
-                playerTransform = player.transform;
+            if (other.gameObject.TryGetComponent(out Rigidbody2D rb))
+            {
+                Vector2 dir = (other.transform.position - transform.position).normalized;
+                rb.AddForce(dir * knockback, ForceMode2D.Impulse);
+            }
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (playerTransform == null || !enemyLife.IsAlive())
-            return;
-
-        if (!playerLife.IsAlive())
-            return;
-
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-
-        if (rb != null)
-            rb.MovePosition(rb.position + direction * (speed * Time.fixedDeltaTime));
-
-        if (anim != null)
-            anim.MovementAnimation(direction);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!collision.gameObject.CompareTag("Player"))
-            return;
-
-        if (collision.gameObject.TryGetComponent<LifeController>(out var playerLife))
-            playerLife.TakeDamage(enemyDamage);
-
-        if (enemyLife != null)
-            enemyLife.Suicide();
-    }
+    public EnemyAnimationHandler Anim => anim;
 }

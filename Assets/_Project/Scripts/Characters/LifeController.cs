@@ -4,7 +4,6 @@ using UnityEngine.Events;
 public class LifeController : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private FlashOnDamage flash;
     [SerializeField] private AnimationManager animator;
 
     [Header("HP Settings")]
@@ -23,9 +22,6 @@ public class LifeController : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<AnimationManager>();
 
-        if (flash == null)
-            flash = GetComponent<FlashOnDamage>();
-
         if (fullHpOnStart)
             SetHp(maxHealth);
     }
@@ -33,7 +29,6 @@ public class LifeController : MonoBehaviour
     private void SetHp(int hp)
     {
         currentHealth = Mathf.Clamp(hp, minHealth, maxHealth);
-        Debug.Log($"{gameObject.name} ha {currentHealth} hp");
     }
 
     public void TakeDamage(int damage)
@@ -43,9 +38,6 @@ public class LifeController : MonoBehaviour
 
         SetHp(currentHealth - damage);
         onHpChange?.Invoke(currentHealth, maxHealth);
-
-        if (flash != null)
-            flash.FlashRed();
 
         if (currentHealth <= minHealth)
         {
@@ -62,11 +54,6 @@ public class LifeController : MonoBehaviour
             animator.DeathAnimation();
     }
 
-    public bool IsAlive()
-    {
-        return !isDead;
-    }
-
     public void Suicide()
     {
         TakeDamage(maxHealth);
@@ -77,4 +64,6 @@ public class LifeController : MonoBehaviour
         isDead = false;
         SetHp(maxHealth);
     }
+
+    public bool IsDead() => isDead;
 }

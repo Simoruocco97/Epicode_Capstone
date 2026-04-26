@@ -5,8 +5,9 @@ public class UI_PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsTab;
-    [SerializeField] private int mainMenuIndex = 0;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private GameObject player;
+    [SerializeField] private int mainMenuIndex = 0;
 
     private void Awake()
     {
@@ -19,16 +20,25 @@ public class UI_PauseMenu : MonoBehaviour
         if (canvasGroup == null)
             canvasGroup = GetComponentInChildren<CanvasGroup>();
 
+        if (player == null)
+            player = FindAnyObjectByType<PlayerController>().gameObject;
+
         CursorLock();
     }
 
     private void Update()
     {
-        if (optionsTab == null || pauseMenu == null)
+        if (optionsTab == null || pauseMenu == null || player == null)
             return;
 
         if (!Input.GetKeyDown(KeyCode.Escape))
             return;
+
+        if (player.TryGetComponent<LifeController>(out var life))
+        {
+            if (life.IsDead())
+                return;
+        }
 
         if (optionsTab.activeSelf)
         {

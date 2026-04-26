@@ -3,17 +3,16 @@ using UnityEngine;
 public class AnimationManager : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
-    [SerializeField] protected string verticalSpeedName = "vSpeed";
-    [SerializeField] protected string horizontalSpeedName = "hSpeed";
 
     protected virtual void Awake()
     {
         if (animator == null)
-            animator = GetComponentInChildren<Animator>();
+            animator = GetComponent<Animator>();
     }
 
-    public void DeathAnimation()
-    {
-        animator.SetBool("isDead", true);
-    }
+    public void JumpAnimation() => animator.SetTrigger("Jump");
+
+    public void DamageAnimation() => animator.SetTrigger("isDamaged");
+
+    public void DeathAnimation() => animator.SetTrigger("isDead");
 }

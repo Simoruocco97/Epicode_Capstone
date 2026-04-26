@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 719735156845623748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -740860874, guid: d3bb3e1203161f240a7f5b16602abbdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 719735156845623748}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 251ef3636a6e57740abff1bf54d5df86, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -122,6 +122,8 @@ GameObject:
   - component: {fileID: 1125789678547426952}
   - component: {fileID: 7652950334477494027}
   - component: {fileID: 5264076367022537895}
+  - component: {fileID: 2853036725768685331}
+  - component: {fileID: 5354194866265889747}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -144,6 +146,7 @@ Transform:
   m_Children:
   - {fileID: 8287436478180029522}
   - {fileID: 7074944811926116543}
+  - {fileID: 1051838902347830307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6365962270862252222
@@ -182,7 +185,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1834621742984979323}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ac15c965e166fb54a945230b54ba1737, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -233,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 6261521278695152487}
+  animator: {fileID: 0}
   rb: {fileID: 6365962270862252222}
   speed: 3.5
   groundChecker: {fileID: 9216577684866107737}
@@ -252,6 +256,7 @@ MonoBehaviour:
   slashPool: {fileID: 0}
   animationHandler: {fileID: 0}
   slashOffset: 0.75
+  slashOffsetY: 0.2
   damage: 10
   attackCooldown: 0.5
 --- !u!114 &7652950334477494027
@@ -283,8 +288,130 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 31382757812084808}
-  verticalSpeedName: vSpeed
-  horizontalSpeedName: hSpeed
+  sr: {fileID: 0}
+--- !u!114 &2853036725768685331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834621742984979323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc36ce0d81f210458a3590312da2e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5264076367022537895}
+  maxHealth: 100
+  minHealth: 0
+  fullHpOnStart: 1
+  onHpChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5354194866265889747}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5354194866265889747}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5354194866265889747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834621742984979323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed73935d196d04b4c9886e5eb87597c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 3788905689576136586}
+  anim: {fileID: 5264076367022537895}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3796540761775652757, guid: ab159811f8db82048a72a3141816b575, type: 3}
+        m_TargetAssemblyTypeName: UI_Gameover, Assembly-CSharp
+        m_MethodName: ShowGameover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &4051735138237673887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051838902347830307}
+  - component: {fileID: 5335499934982570811}
+  m_Layer: 0
+  m_Name: SlashPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1051838902347830307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4051735138237673887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7103799023073354783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5335499934982570811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4051735138237673887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763881885e68629489646026e1b7144b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2519893560307337167, guid: 33a28c6f316c1a3488f6f8b995743b50, type: 3}
+  collectionCheck: 1
+  poolCapacity: 3
+  poolMaxSize: 5
 --- !u!1 &6136525094707013998
 GameObject:
   m_ObjectHideFlags: 0
