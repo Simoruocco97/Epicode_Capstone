@@ -33,6 +33,9 @@ public class UI_MainMenuManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
+        if (PlayerController.Instance != null)
+            PlayerController.Instance.GetComponent<PlayerAttack>().enabled = true;
+
         if (ScreenFade.Instance != null)
             ScreenFade.Instance.FadeIn(() => SceneManager.LoadScene(sceneToLoad));
         else
