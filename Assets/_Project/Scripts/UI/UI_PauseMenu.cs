@@ -11,8 +11,8 @@ public class UI_PauseMenu : MonoBehaviour
     [SerializeField] private int mainMenuIndex = 0;
     private bool canOpen = true;
 
-    public bool ShopOpened() => canOpen = false;
-    public bool ShopClosed() => canOpen = true;
+    public void ShopOpened() => canOpen = false;
+    public void ShopClosed() => canOpen = true;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class UI_PauseMenu : MonoBehaviour
         if (optionsTab == null || pauseMenu == null || player == null)
             return;
 
-        if (!Input.GetKeyDown(KeyCode.Escape))
+        if (!Input.GetKeyDown(KeyCode.Escape) && !Input.GetKeyDown(KeyCode.P))
             return;
 
         if (player.TryGetComponent<LifeController>(out var life))
