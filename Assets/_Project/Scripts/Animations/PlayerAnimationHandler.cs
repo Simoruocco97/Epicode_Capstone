@@ -21,5 +21,7 @@ public class PlayerAnimationHandler : AnimationManager
         animator.SetBool("isMoving", dir != Vector2.zero);
     }
 
+    public void JumpAnimation() => animator.SetTrigger("Jump");
+
     public void SetReset() => animator.SetTrigger("isReset");
 }

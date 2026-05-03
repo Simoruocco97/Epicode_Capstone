@@ -3,11 +3,14 @@ using UnityEngine;
 public class EnemyAnimationHandler : AnimationManager
 {
     [SerializeField] private SpriteRenderer sr;
+    private Vector3 originalScale;
 
     protected override void Awake()
     {
         if (sr == null)
             sr = GetComponentInChildren<SpriteRenderer>();
+
+        originalScale = transform.localScale;
 
         base.Awake();
     }
@@ -15,7 +18,11 @@ public class EnemyAnimationHandler : AnimationManager
     public void Flip(float dirX)
     {
         if (dirX != 0)
-            sr.flipX = dirX > 0;
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = dirX > 0 ? -originalScale.x : originalScale.y;
+            transform.localScale = scale;
+        }
     }
 
     public void MovementAnimation(Vector2 dir)

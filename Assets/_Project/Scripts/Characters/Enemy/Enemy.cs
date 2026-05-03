@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
 
     [Header("Enemy Info")]
-    [SerializeField] protected int enemyDamage = 10;
+    [SerializeField] protected int enemyContactDamage = 10;
     [SerializeField] protected float speed = 2f;
     [SerializeField] protected float damageTimer = 3f;
     [SerializeField] protected float knockback = 2f;
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         {
             lastDamageTime = Time.time;
             if (other.gameObject.TryGetComponent<LifeController>(out var playerLife))
-                playerLife.TakeDamage(enemyDamage);
+                playerLife.TakeDamage(enemyContactDamage);
 
             if (other.gameObject.TryGetComponent(out Rigidbody2D rb))
             {

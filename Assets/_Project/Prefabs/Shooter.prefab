@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1453810362231145799}
   - component: {fileID: 396118308784215188}
   - component: {fileID: 4541053038505447159}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328748868692376129}
   - component: {fileID: 1019099914164546006}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,9 +190,9 @@ GameObject:
   - component: {fileID: 6523009062389196158}
   - component: {fileID: 3722361991877326669}
   - component: {fileID: 1314484954257804661}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Shooter
-  m_TagString: Enemy
+  m_TagString: Shooter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: -0.31058094, z: 0.0012339605}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1453810362231145799}
@@ -291,7 +291,7 @@ MonoBehaviour:
   enemyLife: {fileID: 2072836389754572308}
   anim: {fileID: 3722361991877326669}
   rb: {fileID: 571497166026054924}
-  enemyDamage: 10
+  enemyContactDamage: 10
   speed: 2
   damageTimer: 3
   knockback: 2
@@ -308,10 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: {fileID: 2072836389754572308}
-  col: {fileID: 8526679125990483947}
   drop: {fileID: 6523009062389196158}
-  enemy: {fileID: 6048249792933470029}
-  deathDelay: 5
+  enemyFSM: {fileID: 0}
+  deathDelay: 2
 --- !u!114 &2072836389754572308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3722361991877326669}
-  maxHealth: 100
+  maxHealth: 60
   minHealth: 0
   fullHpOnStart: 1
   onHpChange:
@@ -400,7 +399,7 @@ MonoBehaviour:
   enemyLife: {fileID: 2072836389754572308}
   anim: {fileID: 3722361991877326669}
   rb: {fileID: 571497166026054924}
-  enemyDamage: 10
+  enemyContactDamage: 10
   speed: 1.5
   damageTimer: 3
   knockback: 10

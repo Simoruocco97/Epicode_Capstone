@@ -60,10 +60,18 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(movementController.MoveX * speed, rb.velocity.y);
         animator.MovementAnimation(new Vector2(rb.velocity.x, 0f));
 
+        if (Mathf.Abs(movementController.MoveX) > 0.1f && groundChecker.CheckIsGrounded() && AudioManager.Instance != null)
+            AudioManager.Instance.PlayFootstepSound("PlayerWalk");
+        else if (AudioManager.Instance != null)
+            AudioManager.Instance.StopFootstepSound();
+            
+
         if (canJump && animator != null)
         {
             animator.JumpAnimation();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFXSound("PlayerJump");
             canJump = false;
         }
     }

@@ -10,8 +10,6 @@ public class AnimationManager : MonoBehaviour
             animator = GetComponent<Animator>();
     }
 
-    public void JumpAnimation() => animator.SetTrigger("Jump");
-
     public void DamageAnimation() => animator.SetTrigger("isDamaged");
 
     public void DeathAnimation() => animator.SetTrigger("isDead");

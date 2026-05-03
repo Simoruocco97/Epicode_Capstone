@@ -106,6 +106,7 @@ public class UI_Gameover : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
+
     private void LockCanvas()
     {
         canvasGroup.interactable = false;

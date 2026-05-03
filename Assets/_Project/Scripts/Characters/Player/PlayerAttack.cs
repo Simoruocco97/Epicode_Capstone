@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -7,10 +8,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private PlayerAnimationHandler animationHandler;
 
     [Header("Attack Infos")]
+    [SerializeField] private int baseDamage = 30;
     [SerializeField] private float slashOffset = 1f;
     [SerializeField] private float slashOffsetY = 0.2f;
-    [SerializeField] private int damage = 10;
     [SerializeField] private float attackCooldown = 0.5f;
+    private int damage;
     private float lastAttackTime;
     private float lastDir = 1f;
 
@@ -21,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
 
         if (animationHandler == null)
             animationHandler = GetComponent<PlayerAnimationHandler>();
+
+        damage = baseDamage;
     }
 
     private void Update()
@@ -36,7 +40,15 @@ public class PlayerAttack : MonoBehaviour
             lastAttackTime = Time.time;
             Vector3 offSet = new(lastDir * slashOffset, slashOffsetY, 0f);
             Vector3 spawnPos = transform.position + offSet;
+
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFXSound("PlayerAttack");
+
             slashPool.SpawnSlash(spawnPos, damage, lastDir);
         }
     }
+
+    public void AddDamage(int amount) => damage += amount;
+
+    public void ResetDamage() => damage = baseDamage;
 }

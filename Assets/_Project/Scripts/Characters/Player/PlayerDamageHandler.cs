@@ -4,6 +4,7 @@ public class PlayerDamageHandler : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerAnimationHandler anim;
+    [SerializeField] private Transform spawnPoint;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class PlayerDamageHandler : MonoBehaviour
     public void HandleDeath()
     {
         if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFXSound("GameoverSound");
+            AudioManager.Instance.PlaySFXSound("PlayerDeath");
 
         DisablePlayer();
 
@@ -47,8 +48,26 @@ public class PlayerDamageHandler : MonoBehaviour
             playerController.EnableMovement();
             playerController.enabled = true;
         }
+
         if (TryGetComponent<PlayerAttack>(out var attack))
+        {
             attack.enabled = true;
+            attack.ResetDamage();
+        }
+
+        if (TryGetComponent<Rigidbody2D>(out var rb))
+            rb.velocity = Vector2.zero;
+
+        if (TryGetComponent<LifeController>(out var life))
+            life.ResetHealth();
+
+        if (TryGetComponent<PlayerInventory>(out var inventory))
+            inventory.ResetCoin();
+
+        if (spawnPoint != null)
+            transform.position = spawnPoint.position;
+        else
+            transform.position = Vector3.zero;
 
         if (anim != null)
             anim.SetReset();

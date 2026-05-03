@@ -20,7 +20,7 @@ public class PlayerSlash : MonoBehaviour
             if (other.TryGetComponent<LifeController>(out var life))
                 life.TakeDamage(damage);
 
-            if (other.TryGetComponent(out Rigidbody2D rb) && !other.CompareTag("Shooter"))
+            if (other.TryGetComponent(out Rigidbody2D rb) && !other.CompareTag("Shooter") && !other.CompareTag("Boss"))
             {
                 Vector2 dir = (other.transform.position - transform.position).normalized;
                 rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);

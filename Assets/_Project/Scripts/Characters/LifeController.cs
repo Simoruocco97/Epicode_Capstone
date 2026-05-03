@@ -63,7 +63,14 @@ public class LifeController : MonoBehaviour
     {
         isDead = false;
         SetHp(maxHealth);
+        onHpChange?.Invoke(currentHealth, minHealth);
     }
 
     public bool IsDead() => isDead;
+
+    public void AddMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        SetHp(currentHealth + amount);
+    }
 }

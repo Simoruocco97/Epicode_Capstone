@@ -120,4 +120,10 @@ public abstract class EnemyFSM : Enemy
         if (other.CompareTag("Player"))
             playerInRange = false;
     }
+
+    public virtual void OnHit()
+    {
+        rb.velocity = Vector2.zero;
+        ChangeState(State.Idle);
+    }
 }

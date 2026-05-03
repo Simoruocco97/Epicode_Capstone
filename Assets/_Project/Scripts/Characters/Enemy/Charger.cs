@@ -5,7 +5,7 @@ public class Charger : EnemyFSM
     [SerializeField] private float chargeSpeed = 5f;
     [SerializeField] private float maxChargeCooldown = 5f;
     [SerializeField] private float cooldownTime = 2f;
-    [SerializeField] private float overshootDistance = 2f;
+    [SerializeField] private float chargeOffset = 0.5f;
     private Vector2 chargeTarget;
     private float chargeTimer = 0f;
 
@@ -20,7 +20,7 @@ public class Charger : EnemyFSM
             return;
 
         Vector2 dir = (PlayerController.Instance.transform.position - transform.position).normalized;
-        chargeTarget = (Vector2)PlayerController.Instance.transform.position + (dir * overshootDistance);
+        chargeTarget = (Vector2)PlayerController.Instance.transform.position - dir * chargeOffset;
     }
 
     protected override void ActionFunc()
@@ -35,6 +35,8 @@ public class Charger : EnemyFSM
             chargeTimer = 0f;
             rb.velocity = new Vector2(0f, rb.velocity.y);
             anim.AttackAnimation();
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFXSound("ChargerHit");
             ChangeState(State.Cooldown);
         }
     }
@@ -50,5 +52,11 @@ public class Charger : EnemyFSM
             else
                 ChangeState(State.Patrol);
         }
+    }
+
+    public override void OnHit()
+    {
+        chargeTimer = 0f;
+        base.OnHit();
     }
 }

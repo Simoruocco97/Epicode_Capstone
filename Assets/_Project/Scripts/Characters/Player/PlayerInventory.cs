@@ -11,7 +11,24 @@ public class PlayerInventory : MonoBehaviour
     public void AddCoin(int coin)
     {
         coinCounter += coin;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("CoinPickup");
         coinChange.Invoke();
-        Debug.Log($"Moneta raccolta! Monete totali: {coinCounter}");
+    }
+
+    public bool SpendCoin(int amount)
+    {
+        if (coinCounter < amount)
+            return false;
+        
+        coinCounter -= amount;
+        coinChange.Invoke();
+        return true;
+    }
+
+    public void ResetCoin()
+    {
+        coinCounter = 0;
+        coinChange.Invoke();
     }
 }

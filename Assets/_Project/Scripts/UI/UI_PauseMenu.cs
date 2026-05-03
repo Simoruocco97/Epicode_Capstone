@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,10 @@ public class UI_PauseMenu : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private GameObject player;
     [SerializeField] private int mainMenuIndex = 0;
+    private bool canOpen = true;
+
+    public bool ShopOpened() => canOpen = false;
+    public bool ShopClosed() => canOpen = true;
 
     private void Awake()
     {
@@ -20,8 +25,8 @@ public class UI_PauseMenu : MonoBehaviour
         if (canvasGroup == null)
             canvasGroup = GetComponentInChildren<CanvasGroup>();
 
-        if (player == null)
-            player = FindAnyObjectByType<PlayerController>().gameObject;
+        if (player == null && PlayerController.Instance != null)
+            player = PlayerController.Instance.gameObject;
 
         CursorLock();
     }
@@ -58,6 +63,7 @@ public class UI_PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         optionsTab.SetActive(false);
         CursorLock();
+        StartCoroutine(ResumeDelay());
     }
 
     public void Options()
@@ -77,9 +83,19 @@ public class UI_PauseMenu : MonoBehaviour
 
     private void Pause()
     {
-        Time.timeScale = 0f;
-        pauseMenu.SetActive(true);
-        CursorUnlock();
+        if (canOpen)
+        {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+            CursorUnlock();
+            PlayerController.Instance.GetComponent<PlayerAttack>().enabled = false;
+        }
+    }
+
+    private IEnumerator ResumeDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        PlayerController.Instance.GetComponent<PlayerAttack>().enabled = true;
     }
 
     private void CursorLock()

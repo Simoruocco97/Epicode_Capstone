@@ -40,6 +40,8 @@ public class Shooter : EnemyFSM
 
         Vector2 dir = (playerPos - (Vector2)transform.position).normalized;
         pool.SpawnBullet(transform.position, dir);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("ShooterHit");
         anim.AttackAnimation();
         ChangeState(State.Cooldown);
     }
@@ -56,4 +58,6 @@ public class Shooter : EnemyFSM
                 ChangeState(State.Patrol);
         }
     }
+
+    public override void OnHit() { }
 }

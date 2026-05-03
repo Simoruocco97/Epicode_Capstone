@@ -5,7 +5,6 @@ public class UI_MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsTab;
-    [SerializeField] private GameObject creditsTab;
     [SerializeField] private int sceneToLoad = 1;
     private CanvasGroup canvasGroup;
 
@@ -17,19 +16,16 @@ public class UI_MainMenuManager : MonoBehaviour
         if (optionsTab != null)
             optionsTab.SetActive(false);
 
-        if (creditsTab != null) 
-            creditsTab.SetActive(false);
-
         if (mainMenu != null)
             mainMenu.SetActive(true);
     }
 
     private void Update()
     {
-        if (optionsTab == null || creditsTab == null)
+        if (optionsTab == null)
             return;
 
-        if ((optionsTab.activeSelf || creditsTab.activeSelf) && Input.GetKeyDown(KeyCode.Escape))
+        if ((optionsTab.activeSelf) && Input.GetKeyDown(KeyCode.Escape))
             CloseAllTabs();
     }
 
@@ -55,21 +51,8 @@ public class UI_MainMenuManager : MonoBehaviour
         }
     }
 
-    public void OnCreditsPress()
-    {
-        if (creditsTab != null)
-            creditsTab.SetActive(true);
-
-        if (mainMenu != null && canvasGroup != null)
-        {
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-        }
-    }
-
     public void OnExitPress()
     {
-        Debug.Log("Sei uscito dal gioco");
         Application.Quit();
     }
 
@@ -77,9 +60,6 @@ public class UI_MainMenuManager : MonoBehaviour
     {
         if (optionsTab != null)
             optionsTab.SetActive(false);
-
-        if (creditsTab != null)
-            creditsTab.SetActive(false);
 
         if (canvasGroup != null)
         {
