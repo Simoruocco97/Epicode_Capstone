@@ -15,7 +15,11 @@ public class PlayerController : MonoBehaviour
     [Header("Jump Attributes")]
     [SerializeField] private GroundChecker groundChecker;
     [SerializeField] private float jumpForce = 4f;
-    private bool canJump = false;
+
+    [Header("Double Jump")]
+    private bool doubleJumpUnlocked = false;
+    private int jumpCount = 0;
+    private bool jumpRequested = false;
 
     private void Awake()
     {
@@ -48,8 +52,19 @@ public class PlayerController : MonoBehaviour
         if (animator != null)
             animator.SetGrounded(rb.velocity.y <= -0.1f && groundChecker.CheckIsGrounded());
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundChecker.CheckIsGrounded())
-            canJump = true;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            bool isGrounded = groundChecker.CheckIsGrounded();
+
+            if (isGrounded)
+                jumpCount = 0;
+
+            if (isGrounded || (doubleJumpUnlocked && jumpCount < 2))
+            {
+                jumpCount++;
+                jumpRequested = true;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -64,15 +79,19 @@ public class PlayerController : MonoBehaviour
             AudioManager.Instance.PlayFootstepSound("PlayerWalk");
         else if (AudioManager.Instance != null)
             AudioManager.Instance.StopFootstepSound();
-            
 
-        if (canJump && animator != null)
+        JumpSystem();
+    }
+
+    private void JumpSystem()
+    {
+        if (jumpRequested && animator != null)
         {
             animator.JumpAnimation();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (AudioManager.Instance != null)
                 AudioManager.Instance.PlaySFXSound("PlayerJump");
-            canJump = false;
+            jumpRequested = false;
         }
     }
 
@@ -88,4 +107,6 @@ public class PlayerController : MonoBehaviour
         rb.isKinematic = false;
         enabled = true;
     }
+
+    public void UnlockDoubleJump() => doubleJumpUnlocked = true;
 }

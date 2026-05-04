@@ -34,8 +34,13 @@ public class BossDamageHandler : MonoBehaviour
     {
         transform.position = new Vector2(transform.position.x, 0);
         bossAnim.DeathAnimation();
+
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("BossDeath");
+
+        if (PlayerController.Instance != null)
+            PlayerController.Instance.UnlockDoubleJump();
+
         col.enabled = false;
         GetComponent<BossFSM>().enabled = false;
         Invoke(nameof(LoadEndScene), deathDelay);

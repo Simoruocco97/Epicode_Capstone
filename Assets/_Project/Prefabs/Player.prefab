@@ -242,7 +242,7 @@ MonoBehaviour:
   rb: {fileID: 6365962270862252222}
   speed: 3.5
   groundChecker: {fileID: 9216577684866107737}
-  jumpForce: 5
+  jumpForce: 6
 --- !u!114 &1125789678547426952
 MonoBehaviour:
   m_ObjectHideFlags: 0
