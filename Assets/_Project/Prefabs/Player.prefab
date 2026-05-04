@@ -310,10 +310,10 @@ MonoBehaviour:
   onHpChange:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5354194866265889747}
-        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
-        m_MethodName: HandleDamage
-        m_Mode: 1
+      - m_Target: {fileID: 2193919406441498986}
+        m_TargetAssemblyTypeName: UI_Lifebar, Assembly-CSharp
+        m_MethodName: UpdateLifebar
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -322,10 +322,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2193919406441498986}
-        m_TargetAssemblyTypeName: UI_Lifebar, Assembly-CSharp
-        m_MethodName: UpdateLifebar
-        m_Mode: 0
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5354194866265889747}
+        m_TargetAssemblyTypeName: PlayerDamageHandler, Assembly-CSharp
+        m_MethodName: HandleDamage
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

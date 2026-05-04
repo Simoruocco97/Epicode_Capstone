@@ -8516,7 +8516,7 @@ Transform:
   m_GameObject: {fileID: 1288563018}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.02, y: -1.782523, z: 0}
+  m_LocalPosition: {x: 6.02, y: -1.605, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9487,8 +9487,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Il boss ti ha sbloccato dei nuovi ricordi. Ora sai come poter saltare
-    pi\xF9 in alto. Premi due volte spazio!"
+  m_text: The Boss has unlocked a latent memory. You can now jump higher! Double-press
+    Space.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af98b0dcfd13c6a48b9f3b5f93d25db8, type: 2}
   m_sharedMaterial: {fileID: 5578710625433522476, guid: af98b0dcfd13c6a48b9f3b5f93d25db8, type: 2}
@@ -9515,7 +9515,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.6
+  m_fontSize: 32.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

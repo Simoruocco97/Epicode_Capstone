@@ -15,6 +15,7 @@ public class LifeController : MonoBehaviour
 
     [Header("Event Settings")]
     [SerializeField] private UnityEvent<int, int> onHpChange;
+    [SerializeField] private UnityEvent<int, int> onDamage;
     [SerializeField] private UnityEvent onDeath;
 
     private void Awake()
@@ -38,6 +39,7 @@ public class LifeController : MonoBehaviour
 
         SetHp(currentHealth - damage);
         onHpChange?.Invoke(currentHealth, maxHealth);
+        onDamage?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= minHealth)
         {
@@ -63,7 +65,7 @@ public class LifeController : MonoBehaviour
     {
         isDead = false;
         SetHp(maxHealth);
-        onHpChange?.Invoke(currentHealth, minHealth);
+        onHpChange?.Invoke(currentHealth, maxHealth);
     }
 
     public bool IsDead() => isDead;
@@ -72,5 +74,6 @@ public class LifeController : MonoBehaviour
     {
         maxHealth += amount;
         SetHp(currentHealth + amount);
+        onHpChange?.Invoke(currentHealth, maxHealth);
     }
 }

@@ -11127,7 +11127,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 14.447382, y: 3.2717645}
+  m_Offset: {x: 12.970587, y: 3.0847034}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11138,7 +11138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.5648117, y: 7.929398}
+  m_Size: {x: 6.391819, y: 8.30352}
   m_EdgeRadius: 0
 --- !u!1 &1370101115
 GameObject:
@@ -14457,7 +14457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1457286057297733960, guid: 7172a48bb357e8f42a107027980e9545, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 305
+      value: 261
       objectReference: {fileID: 0}
     - target: {fileID: 1457286057297733960, guid: 7172a48bb357e8f42a107027980e9545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14474,6 +14474,10 @@ PrefabInstance:
     - target: {fileID: 9063367857858509926, guid: 7172a48bb357e8f42a107027980e9545, type: 3}
       propertyPath: m_Name
       value: PressE
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063367857858509926, guid: 7172a48bb357e8f42a107027980e9545, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

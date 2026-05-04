@@ -18,6 +18,9 @@ public class UI_MainMenuManager : MonoBehaviour
 
         if (mainMenu != null)
             mainMenu.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void Update()

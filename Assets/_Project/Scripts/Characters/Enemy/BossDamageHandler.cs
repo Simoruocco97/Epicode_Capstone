@@ -48,9 +48,9 @@ public class BossDamageHandler : MonoBehaviour
 
     private void LoadEndScene()
     {
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        SceneManager.LoadScene(endSceneIndex);
+        if (ScreenFade.Instance != null)
+            ScreenFade.Instance.FadeIn(() => SceneManager.LoadScene(endSceneIndex));
+        else
+            SceneManager.LoadScene(endSceneIndex);
     }
 }
