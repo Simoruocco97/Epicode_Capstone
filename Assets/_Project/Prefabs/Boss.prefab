@@ -17,7 +17,10 @@ GameObject:
   - component: {fileID: 7775517783841552620}
   - component: {fileID: 9061736175715631365}
   - component: {fileID: 4870016162702707107}
-  m_Layer: 0
+  - component: {fileID: 5522519609001073673}
+  - component: {fileID: 5459719731109419591}
+  - component: {fileID: 8824091382626590735}
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -38,6 +41,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 83020505435840611}
+  - {fileID: 7811227304129086211}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5204175644656870265
@@ -125,7 +129,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -172,8 +176,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009572983, y: -0.02872034}
-  m_Size: {x: 0.30520615, y: 0.6115522}
+  m_Offset: {x: -0.009572983, y: -0.09867474}
+  m_Size: {x: 0.30520615, y: 0.42078638}
   m_Direction: 0
 --- !u!114 &361518575605138603
 MonoBehaviour:
@@ -191,17 +195,17 @@ MonoBehaviour:
   anim: {fileID: 0}
   rb: {fileID: 1197169402317132475}
   enemyContactDamage: 10
-  speed: 1.5
+  speed: 2
   damageTimer: 3
   knockback: 3
   bossAnim: {fileID: 4870016162702707107}
   sr: {fileID: 5204175644656870265}
-  bossLaserTransform: {fileID: 0}
   laserTransform: {fileID: 83020505435840611}
+  armThrowTransform: {fileID: 7811227304129086211}
   laserPool: {fileID: 0}
   armPool: {fileID: 0}
-  cooldownTime: 3
-  meleeAttackRange: 1.5
+  cooldownTime: 2.5
+  meleeAttackRange: 1.6
 --- !u!114 &7775517783841552620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4870016162702707107}
-  maxHealth: 500
+  maxHealth: 800
   minHealth: 0
   fullHpOnStart: 1
   onHpChange:
@@ -263,8 +267,9 @@ MonoBehaviour:
   life: {fileID: 7775517783841552620}
   bossAnim: {fileID: 4870016162702707107}
   col: {fileID: 4260075011692930924}
-  deathDelay: 20
-  endSceneIndex: 6
+  flash: {fileID: 8824091382626590735}
+  deathDelay: 5
+  endSceneIndex: 7
 --- !u!114 &4870016162702707107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +283,110 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8951134186710434682}
+--- !u!114 &5522519609001073673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765059075428361072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b80cfbf17cb6f44bc4e152d79ce320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 5459719731109419591}
+  damage: 30
+--- !u!61 &5459719731109419591
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765059075428361072}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.34763557, y: -0.027761698}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5625, y: 1.5625}
+    newSize: {x: 1.5625, y: 1.5625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.393965, y: 0.58482647}
+  m_EdgeRadius: 0
+--- !u!114 &8824091382626590735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765059075428361072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a119cbd5b91a8b40a098ee8135679c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  sprite: {fileID: 5204175644656870265}
+--- !u!1 &3077074890122143164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7811227304129086211}
+  m_Layer: 7
+  m_Name: ArmThrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7811227304129086211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077074890122143164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.336, y: 0.138, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2300605258303196638}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3995829429165209651
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 83020505435840611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LaserShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +412,7 @@ Transform:
   m_GameObject: {fileID: 3995829429165209651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.118, y: 0.258, z: 0}
+  m_LocalPosition: {x: 0.034, y: 0.503, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

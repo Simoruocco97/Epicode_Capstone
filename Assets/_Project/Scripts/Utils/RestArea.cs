@@ -50,7 +50,7 @@ public class RestArea : MonoBehaviour
     {
         isResting = true;
 
-        if (pressE != null) 
+        if (pressE != null)
             pressE.SetActive(false);
 
         ScreenFade fade = ScreenFade.Instance;
@@ -64,6 +64,8 @@ public class RestArea : MonoBehaviour
 
         if (playerLife != null)
             playerLife.ResetHealth();
+
+        CheckpointSystem.SetCheckpoint(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
 
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("RestSound");

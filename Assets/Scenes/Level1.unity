@@ -419,7 +419,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1597833836}
   optionsTab: {fileID: 1386294450}
   canvasGroup: {fileID: 1597833838}
-  player: {fileID: 5601646535838216049}
+  player: {fileID: 0}
   mainMenuIndex: 0
 --- !u!1 &108574482
 GameObject:
@@ -13363,11 +13363,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef73c72d9e96a5944b4b5f6f54c7a9b4, type: 3}
---- !u!1 &5601646535838216049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1834621742984979323, guid: ef73c72d9e96a5944b4b5f6f54c7a9b4, type: 3}
-  m_PrefabInstance: {fileID: 5601646535838216048}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6216342908491110173
 PrefabInstance:
   m_ObjectHideFlags: 0

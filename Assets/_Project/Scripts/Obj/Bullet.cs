@@ -47,6 +47,9 @@ public class Bullet : MonoBehaviour
     {
         if (rb == null)
             return;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         rb.AddForce(dir * bulletSpeed, ForceMode2D.Impulse);
     }
 }

@@ -98,15 +98,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0714285
-    functionName: GoToCooldown
+  - time: 1
+    functionName: DeactivateCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0714285
-    functionName: DeactivateCollider
+    functionName: GoToCooldown
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

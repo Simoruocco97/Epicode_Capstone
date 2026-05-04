@@ -6,6 +6,7 @@ public class BossFSM : Enemy
     [SerializeField] private BossAnimationHandler bossAnim;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Transform laserTransform;
+    [SerializeField] private Transform armThrowTransform;
     [SerializeField] private LaserPool laserPool;
     [SerializeField] private BulletPool armPool;
 
@@ -137,13 +138,7 @@ public class BossFSM : Enemy
             return;
 
         hasThrown = true;
-
-        Vector2 dir = (PlayerController.Instance.transform.position - transform.position).normalized;
-        armPool.SpawnBullet(transform.position, dir);
-        if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFXSound("BossProjectile");
-        Flip(dir);
-        ChangeState(State.Cooldown);
+        bossAnim.ArmThrowAnimation();
     }
 
     private void LaserFunc()
@@ -213,6 +208,25 @@ public class BossFSM : Enemy
     private void Flip(Vector2 dir)
     {
         if (dir.x != 0)
-            sr.flipX = dir.x < 0;
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = dir.x < 0 ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+    }
+
+    public void SpawnProjectile()
+    {
+        if (PlayerController.Instance == null)
+            return;
+
+        Vector2 dir = (PlayerController.Instance.transform.position - armThrowTransform.position).normalized;
+        armPool.SpawnBullet(armThrowTransform.position, dir);
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFXSound("BossProjectile");
+
+        Flip(dir);
+        ChangeState(State.Cooldown);
     }
 }

@@ -25,10 +25,13 @@ public class UI_PauseMenu : MonoBehaviour
         if (canvasGroup == null)
             canvasGroup = GetComponentInChildren<CanvasGroup>();
 
+        CursorLock();
+    }
+
+    private void Start()
+    {
         if (player == null && PlayerController.Instance != null)
             player = PlayerController.Instance.gameObject;
-
-        CursorLock();
     }
 
     private void Update()
@@ -78,6 +81,7 @@ public class UI_PauseMenu : MonoBehaviour
     public void ReturnToMain()
     {
         Time.timeScale = 1f;
+        CheckpointSystem.Reset();
         SceneManager.LoadScene(mainMenuIndex);
     }
 

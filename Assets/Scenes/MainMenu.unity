@@ -2508,7 +2508,7 @@ MonoBehaviour:
   - ClipName: BossMelee
     AudioClip: {fileID: 8300000, guid: 7b1019b8ed95e874a8cf07991f703172, type: 3}
   - ClipName: BossAwakening
-    AudioClip: {fileID: 8300000, guid: bb76f996a26f953418f8172c1d6d2a59, type: 3}
+    AudioClip: {fileID: 8300000, guid: a62e57698da4c7646930415d7bd003ae, type: 3}
   - ClipName: ChargerHit
     AudioClip: {fileID: 8300000, guid: 314082f7bb931fe4b953636bc8c88799, type: 3}
   - ClipName: ShooterHit

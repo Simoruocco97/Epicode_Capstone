@@ -65,7 +65,8 @@ public class UI_Gameover : MonoBehaviour
         {
             HideGameover();
             LockCanvas();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            int sceneToLoad = CheckpointSystem.RestAreaUsed ? CheckpointSystem.RestAreaScene: 1;
+            SceneManager.LoadScene(sceneToLoad);
         });
     }
 
@@ -85,6 +86,7 @@ public class UI_Gameover : MonoBehaviour
         {
             HideGameover();
             CursorUnlock();
+            CheckpointSystem.Reset();
             SceneManager.LoadScene(mainMenuIndex);
         });
     }
