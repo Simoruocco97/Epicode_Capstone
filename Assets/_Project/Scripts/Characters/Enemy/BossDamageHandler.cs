@@ -32,6 +32,7 @@ public class BossDamageHandler : MonoBehaviour
 
     public void HandleDeath()
     {
+        transform.position = new Vector2(transform.position.x, 0);
         bossAnim.DeathAnimation();
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlaySFXSound("BossDeath");

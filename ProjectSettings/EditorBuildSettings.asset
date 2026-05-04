@@ -19,6 +19,12 @@ EditorBuildSettings:
     guid: 5bf66cec4a8af5748a298117c7601c2b
   - enabled: 1
     path: Assets/Scenes/Level4.unity
+    guid: 8a7eaba7272daac429d4a287a8b702e7
+  - enabled: 1
+    path: Assets/Scenes/Level5.unity
+    guid: 87c38989c9a09804a9ca451df826b38e
+  - enabled: 1
+    path: Assets/Scenes/BossRoom.unity
     guid: 8a8b9e7dbdccc9e43973606f5119c79c
   - enabled: 1
     path: Assets/Scenes/EndDemo.unity

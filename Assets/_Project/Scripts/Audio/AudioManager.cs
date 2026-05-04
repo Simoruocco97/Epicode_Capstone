@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip mainMenuBackground;
     [SerializeField] private AudioClip inGameBackground;
+    [SerializeField] private AudioClip bossBackground;
     [SerializeField] private List<Sound> sfxSounds;
 
     [Header("PlayerPrefs")]
@@ -47,6 +48,8 @@ public class AudioManager : MonoBehaviour
             PlayBackgroundMusic(mainMenuBackground);
         else if (backgroundSource.clip != inGameBackground)
             PlayBackgroundMusic(inGameBackground);
+        else if (scene.name == "BossRoom")
+            PlayBackgroundMusic(bossBackground);
     }
 
     private void PlayBackgroundMusic(AudioClip clip)

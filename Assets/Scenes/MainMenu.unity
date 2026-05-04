@@ -2487,6 +2487,7 @@ MonoBehaviour:
   footstepsSource: {fileID: 2020999427}
   mainMenuBackground: {fileID: 8300000, guid: 62e03b280d8800046b2e32b946fd018e, type: 3}
   inGameBackground: {fileID: 8300000, guid: 01663f97116c5ca4dbac99c1551f6f6b, type: 3}
+  bossBackground: {fileID: 8300000, guid: c0dbab254912ee244adef5f17043a871, type: 3}
   sfxSounds:
   - ClipName: PlayerAttack
     AudioClip: {fileID: 8300000, guid: f25c7f5ae15632d43b7ebbe80b2d4c8e, type: 3}
@@ -2518,6 +2519,8 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: df56a8ffa59d495468a1b15d1755db29, type: 3}
   - ClipName: CoinPickup
     AudioClip: {fileID: 8300000, guid: c92501cc6eb0b59498ff579403d94217, type: 3}
+  - ClipName: RestSound
+    AudioClip: {fileID: 8300000, guid: c1b8672dddc88104c991df33e6761bfc, type: 3}
 --- !u!4 &1036996286
 Transform:
   m_ObjectHideFlags: 0

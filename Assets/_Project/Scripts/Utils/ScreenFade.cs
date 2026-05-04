@@ -50,4 +50,6 @@ public class ScreenFade : MonoBehaviour
     {
         FadeOut();
     }
+
+    public float FadeTime => fadeTime;
 }
