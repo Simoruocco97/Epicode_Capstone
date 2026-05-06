@@ -4,4 +4,4 @@ CAPSTONE PROJECT di Simone Ruocco - Progetto finale per EPICODE
 	[https://simonci.itch.io/fading-visage]
 
 	Link per il trailer del gioco
-	[]
+	[https://youtu.be/m3V6Wthxe6Q]
